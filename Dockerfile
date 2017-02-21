@@ -1,4 +1,7 @@
-FROM armbuild/debian:jessie
+FROM resin/armv7hf-debian-qemu
+#FROM armbuild/debian:jessie
+
+RUN [ "cross-build-start" ]
 
 # persistent / runtime deps
 ENV PHPIZE_DEPS \
@@ -226,6 +229,8 @@ RUN echo '\nexport TERM=xterm' >> /root/.bashrc
 
 # add phpinfo file
 ADD index.php /var/www/html/index.php
+
+RUN [ "cross-build-end" ]
 
 WORKDIR /var/www/html
 
